@@ -1,6 +1,7 @@
 import { ExtendedCountryInfo, useCountryStore } from "../store/useCountryStore"
 import { explainGini, explainIncomeLevel, explainLendingType } from "../utils/explainCountryInfo"
 import { useState, useEffect } from "react"
+import Spinner from "./Spinner/Spinner"
 
 const FinancialInfo = ({ country }: { country: ExtendedCountryInfo}) => (
   <div className="financial-info">
@@ -24,7 +25,7 @@ const GeneralInfo = ({ country }: { country: ExtendedCountryInfo }) => (
       <p><strong>Languages:</strong> {Object.values(country.languages).join(', ')}</p>
     )}
     {country.currencies && (
-      <p><strong>Currencies:</strong> 
+      <p><strong>Currencies: </strong> 
         {Object.values(country.currencies).map(cur => `${cur.name} (${cur.symbol})`).join(', ')}
       </p>
     )}
@@ -50,24 +51,24 @@ export const CountryInfo = () => {
     if (country) setOpen(true)
   }, [country])
 
-  if (loading) return <p>Loading...</p>
+  console.log('====================================');
+  console.log(loading);
+  console.log('====================================');
+  if (loading) return <Spinner />
   if (error) return <p>Error: {error}</p>
   if (!country || !open) return null
 
   return (
     <div className="modal-overlay" onClick={() => setOpen(false)}>
       <div className="countryInfo" onClick={(e) => e.stopPropagation()}>
-        {/* Название страны с флагом и гербом */}
         <h2 style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           {country.flag && <img src={country.flag} alt={`${country.name} flag`} style={{ width: '50px' }} />}
           {country.coatOfArms && <img src={country.coatOfArms} alt={`${country.name} coat of arms`} style={{ width: '50px' }} />}
           {country.name}
         </h2>
 
-        {/* Финансовая информация */}
         <FinancialInfo country={country} />
 
-        {/* Остальная информация */}
         <GeneralInfo country={country} />
 
         <button onClick={() => setOpen(false)}>Close</button>
