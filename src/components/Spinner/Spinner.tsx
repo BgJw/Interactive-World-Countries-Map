@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-
+// test Spinner component
 interface SpinnerProps {
     visible?: boolean;
 }
@@ -28,7 +28,6 @@ const Spinner: React.FC<SpinnerProps> = ({ visible = true }) => {
         };
     }, [visible]);
 
-    // When visible becomes false, reset progress
     useEffect(() => {
         if (!visible) setProgress(0);
     }, [visible]);
@@ -41,7 +40,7 @@ const Spinner: React.FC<SpinnerProps> = ({ visible = true }) => {
             top: 0,
             left: 0,
             width: '100%',
-            height: '4px',
+            height: '5px',
             zIndex: 9999,
             background: 'transparent'
         }}>

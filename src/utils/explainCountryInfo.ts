@@ -45,3 +45,23 @@ export function explainGini(gini: number | undefined): string {
     return `${gini}% — very high income inequality. Most wealth is held by a very small part of the population.`
   }
 }
+
+export function explainPopulationDensity(density: number | undefined): string {
+  if (density === undefined || density === null || isNaN(density)) {
+    return 'No data on population density.'
+  }
+
+  const fixedDensity = parseFloat(density.toFixed(1))
+
+  if (fixedDensity <= 50) {
+    return `${fixedDensity} people per km² — very low population density. The country has vast territories with few in habitants.`
+  } else if (fixedDensity <= 150) {
+    return `${fixedDensity} people per km² — low population density. The country has a lot of space compared to its population.`
+  } else if (fixedDensity <= 400) {
+    return `${fixedDensity} people per km² — medium population density. The country is more evenly populated.`
+  } else if (fixedDensity <= 1000) {
+    return `${fixedDensity} people per km² — high population density. The country is compact and heavily populated.`
+  } else {
+    return `${fixedDensity} people per km² — very high population density. The country is extremely crowded.`
+  }
+}
