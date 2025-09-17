@@ -1,4 +1,5 @@
 import { ComposableMap, Geographies, Geography, Annotation } from "react-simple-maps";
+import { Feature, Geometry, GeoJsonProperties } from "geojson";
 import { useEffect, useState } from "react";
 import * as topojson from "topojson-client";
 import { geoCentroid, geoArea } from "d3-geo";
@@ -8,7 +9,7 @@ import iso from 'iso-3166-1';
 const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
 export const WorldMap = () => {
-  const [geographies, setGeographies] = useState<any[]>([]);
+  const [geographies, setGeographies] = useState<Feature<Geometry, GeoJsonProperties>[]>([]);
   const fetchCountry = useCountryStore( state => state.fetchCountry);
 
   useEffect(() => {
@@ -72,7 +73,7 @@ export const WorldMap = () => {
                               alignmentBaseline="middle"
                               style={{ fontSize: 4, fill: "#333", cursor: "default", pointerEvents: "none", letterSpacing: "0.05em" }}
                               >
-                          {geo.properties.name}
+                                {geo.properties.name}
                           </text>
                       </Annotation>
                     )}

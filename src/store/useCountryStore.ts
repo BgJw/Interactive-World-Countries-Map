@@ -22,11 +22,7 @@ export interface ExtendedCountryInfo {
   coatOfArms?: string
   timezones?: string[]
   googleMaps?: string
-  fifa?: string
-  tld?: string[]
-  demonyms?: Record<string, { f: string; m: string }>
   gini?: Record<string, number>
-  startOfWeek?: string
 }
 
 interface CountryState {
@@ -51,6 +47,7 @@ fetchCountry: async (code: string) => {
 
     const wb = wbRes.data[1][0]
     const rest = restRes.data[0]
+
     const merged: ExtendedCountryInfo = {
       id: wb.id,
       name: wb.name,
@@ -70,11 +67,7 @@ fetchCountry: async (code: string) => {
       coatOfArms: rest.coatOfArms?.svg,
       timezones: rest.timezones,
       googleMaps: rest.maps?.googleMaps,
-      fifa: rest.fifa,
-      tld: rest.tld,
-      demonyms: rest.demonyms,
       gini: rest.gini,
-      startOfWeek: rest.startOfWeek
     }
 
     set({ country: merged, loading: false })
