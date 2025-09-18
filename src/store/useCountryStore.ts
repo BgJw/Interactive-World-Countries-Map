@@ -30,6 +30,7 @@ interface CountryState {
   loading: boolean
   error: string | null
   fetchCountry: (code: string) => void
+  clearCountry: () => void
 }
 
 export const useCountryStore = create<CountryState>((set) => ({
@@ -74,6 +75,7 @@ fetchCountry: async (code: string) => {
   } catch (error: any) {
     set({ error: error.message, loading: false })
   }
-}
+}, 
+clearCountry: () => set({ country: null, error: null, loading: false })
 
 }))

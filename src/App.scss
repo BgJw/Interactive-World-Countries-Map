@@ -20,6 +20,7 @@ html, body, #root {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #2366a5;
 }
 
 
@@ -31,9 +32,8 @@ html, body, #root {
   height: 100vh;
   background: rgba(0, 0, 0, 0.5); 
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 999; 
+  z-index: 999;
 }
 
 
@@ -46,6 +46,7 @@ html, body, #root {
   width: 90%; 
   z-index: 1000;
   animation: fadeIn 0.3s ease-in-out;
+  margin-left: 50px;
 }
 
 

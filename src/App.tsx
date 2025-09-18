@@ -1,4 +1,4 @@
-import { CountryInfo } from './components/CountryInfo'
+import { CountryInfo } from './components/countryInfo/CountryInfo'
 import { WorldMap } from './components/WorldMap'
 import './App.scss'
 

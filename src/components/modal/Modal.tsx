@@ -1,3 +1,5 @@
+import { useCountryStore } from "../../store/useCountryStore";
+
 interface ModalProps {
   open: boolean
   onClose: () => void
@@ -5,13 +7,14 @@ interface ModalProps {
 }
 
 export const Modal = ({ open, onClose, children }: ModalProps) => {
+  const clearCountry = useCountryStore( state => state.clearCountry);
   if (!open) return null
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    <div className="modal-overlay" onClick={() => { onClose(); clearCountry(); }}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         {children}
-        <button onClick={onClose}>Close</button>
+        <button onClick={() => {onClose(); clearCountry();}}>Close</button>
       </div>
     </div>
   )

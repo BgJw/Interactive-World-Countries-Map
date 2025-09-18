@@ -6,7 +6,8 @@ import { geoCentroid, geoArea } from "d3-geo";
 import { useCountryStore } from "../store/useCountryStore";
 import iso from 'iso-3166-1';
 
-const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
+const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json";
+
 
 export const WorldMap = () => {
   const [geographies, setGeographies] = useState<Feature<Geometry, GeoJsonProperties>[]>([]);
@@ -31,7 +32,14 @@ export const WorldMap = () => {
 
   return (
     <div className="worldMap">
-      <ComposableMap projection="geoEqualEarth" accumulate="none" style={{ width: "75%", height: "100%", marginTop: "-160px" }}>
+      <ComposableMap 
+          projection="geoNaturalEarth1" 
+          accumulate="none" 
+          style={{ width: "80%", height: "100%", marginTop: "-300px" }} 
+        projectionConfig={{
+        scale: 140,
+        center: [0, 20],
+      }}> 
         {geographies.length > 0 && (
           <Geographies geography={geographies}>
             {({ geographies }) =>
