@@ -6,6 +6,7 @@ import { ErrorModal } from "../modal/ErrorModal"
 import { FinancialInfo } from "./FinancialInfo"
 import { GeneralInfo } from "./GeneralInfo"
 import { Header } from "./Header"
+import "./CountryInfo.module.css";
 
 
 export const CountryInfo = () => {

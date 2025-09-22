@@ -7,12 +7,7 @@ interface HeaderProps {
 export const Header = ({name, coatOfArms, flag}: HeaderProps) => {
 return (
         <h2
-            style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                gap: '10px',
-        }}
+            className="countryHeader"
         >
         {flag && (
             <img

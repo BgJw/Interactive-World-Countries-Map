@@ -1,4 +1,4 @@
-import { ComposableMap, Geographies, Geography, Annotation } from "react-simple-maps";
+import { ComposableMap, Geographies, Geography, Annotation, Graticule } from "react-simple-maps";
 import { Feature, Geometry, GeoJsonProperties } from "geojson";
 import { useEffect, useState } from "react";
 import * as topojson from "topojson-client";
@@ -39,7 +39,8 @@ export const WorldMap = () => {
         projectionConfig={{
         scale: 140,
         center: [0, 20],
-      }}> 
+      }}>
+      <Graticule stroke="#000000ff" step={[30, 30]} />  
         {geographies.length > 0 && (
           <Geographies geography={geographies}>
             {({ geographies }) =>
@@ -61,11 +62,13 @@ export const WorldMap = () => {
                       }}
                       geography={geo}
                       style={{
-                        default: { fill: "#ccc", outline: "none" },
+                        default: { fill: "rgba(221, 221, 221, 1)", outline: "none" },
                         hover: { fill: "#aaa", outline: "none" },
                         pressed: { fill: "#666", outline: "none" },
                       }}
-                      />
+                      >
+                        <title>{geo.properties.name}</title>
+                    </Geography>
                     {
                       area > 0.002 && (
                         <Annotation
@@ -79,7 +82,7 @@ export const WorldMap = () => {
                               y={0}
                               textAnchor="middle"
                               alignmentBaseline="middle"
-                              style={{ fontSize: 4, fill: "#333", cursor: "default", pointerEvents: "none", letterSpacing: "0.05em" }}
+                              style={{ fontSize: Math.max(1, Math.min(4, area * 1000)), fill: "#333", cursor: "default", pointerEvents: "none", letterSpacing: "0.05em" }}
                               >
                                 {geo.properties.name}
                           </text>
